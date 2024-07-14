@@ -1,0 +1,98 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  position: relative;
+  top: 25%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #341fe6;
+  border: 2px solid #341fe6;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.btn:hover {
+  background: hsl(246.33165829145727deg 79.91967871485943% 61.17647058823529%);
+  border: 2px solid
+    hsl(246.33165829145727deg 79.91967871485943% 61.17647058823529%);
+  border-radius: 50px;
+  box-shadow: none;
+}
+
+.btn:disabled {
+  background-color: hsl(246.33165829145727deg 15% 51.17647058823529%);
+  border-radius: 50px;
+  color: white;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input[type="file"] {
+  margin-right: 10px;
+}
+
+.transaction-info {
+  margin-bottom: 20px;
+}
+
+.file-retrieve {
+  margin-top: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+}
+#root {
+  background-image: url("./bg1.jpg");
+  height: 100vh;
+}
+#feild {
+  border-radius: 10px;
+}
