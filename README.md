@@ -1,103 +1,47 @@
 # Decentralized File Management System
 
 ## Description
-This project implements a decentralized file management system using blockchain technology.
+The Decentralized File Management System project aims to provide a secure and decentralized way to manage files using blockchain technology. It allows users to upload files, create blockchain-based assets for each file, and retrieve files based on blockchain records.
 
 ## Features
-
-- **File Upload:** Allows users to upload files securely.
-- **Asset Creation:** Generates assets on the blockchain for each uploaded file.
-- **File Retrieval:** Retrieves files based on blockchain records.
+- **File Upload:** Users can securely upload files through a user-friendly interface.
+- **Asset Creation:** Each uploaded file generates a unique asset on the blockchain, associated with its IPFS address.
+- **File Retrieval:** Users can retrieve uploaded files based on the blockchain records.
 
 ## Installation
-To install and run this project locally:
+To install and run the Decentralized File Management System locally, follow these steps:
+1. Clone the repository: `git clone https://github.com/yourusername/your-repo.git`
+2. Navigate to the project directory: `cd your-repo`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm start`
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/your-repo.git
-Navigate to the project directory:
+## Usage
+1. Connect your MetaMask wallet to interact with the Ethereum blockchain.
+2. Use the file upload interface to upload files.
+3. Check transaction details and retrieve uploaded files using the provided functionality.
 
-bash
-Copy code
-cd your-repo
-Install dependencies:
+## Technologies Used
+The Decentralized File Management System is built using the following technologies:
+- **Frontend:** React
+- **Backend:** Express
+- **Blockchain:** Ethereum
+- **Wallet Integration:** MetaMask
 
-bash
-Copy code
-npm install
-Start the development server:
+## Contributing
+Contributions to the Decentralized File Management System project are welcome! To contribute:
+1. Fork the repository.
+2. Create your feature branch: `git checkout -b feature/NewFeature`.
+3. Commit your changes: `git commit -am 'Add some feature'`.
+4. Push to the branch: `git push origin feature/NewFeature`.
+5. Submit a pull request.
 
-bash
-Copy code
-npm start
-Usage
-Connect your MetaMask wallet.
-Upload a file using the interface.
-Check transaction details and retrieve uploaded files.
-Technologies Used
-React
-Express
-Ethereum blockchain
-MetaMask
-Contributing
-We welcome contributions! Please fork this repository and submit a pull request.
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Additional Documentation
+For more detailed information:
+- [API Documentation](docs/api.md): Details about the APIs used in the project.
+- [Blockchain Integration Guide](docs/blockchain-integration.md): Guide for integrating with the Ethereum blockchain.
 
-Additional Documentation
-API Documentation
-Blockchain Integration Guide
-Contact
+## Contact
 For questions or support, contact us at team@example.com.
-
-Asset Management Smart Contract
-This smart contract manages assets stored on the blockchain using the Soroban SDK. It allows creation and retrieval of assets associated with IPFS addresses.
-
-Contract Overview
-The AssetContract is designed to facilitate the creation and retrieval of assets stored on the blockchain. It utilizes the Soroban SDK for blockchain interaction and storage.
-
-Contract Types
-Asset Struct
-rust
-Copy code
-#![no_std]
-use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, Symbol, String};
-
-#[contracttype]
-#[derive(Clone)]
-pub struct Asset {
-    pub ipfs_address: String,
-}
-
-#[contracttype]
-pub enum AssetBook {
-    Asset(u64),
-}
-
-const COUNT_ASSET: Symbol = symbol_short!("C_ASSET");
-
-#[contract]
-pub struct AssetContract;
-
-#[contractimpl]
-impl AssetContract {
-    pub fn create_asset(env: Env, ipfs_address: String) -> u64 {
-        let mut count_asset: u64 = env.storage().instance().get(&COUNT_ASSET).unwrap_or(0);
-        count_asset += 1;
-
-        let asset = Asset { ipfs_address };
-
-        env.storage().instance().set(&AssetBook::Asset(count_asset), &asset);
-        env.storage().instance().set(&COUNT_ASSET, &count_asset);
-
-        count_asset
-    }
-
-    pub fn fetch_asset(env: Env, asset_id: u64) -> String {
-        let asset: Asset = env.storage().instance().get(&AssetBook::Asset(asset_id)).unwrap_or_else(|| {
-            panic!("Asset not found");
-        });
-        asset.ipfs_address
-    }
-}
