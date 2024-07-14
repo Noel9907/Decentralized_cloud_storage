@@ -1,57 +1,3 @@
-# Project Name
-
-## Description
-Provide a brief overview of your project.
-
-## Features
-
-- **Feature 1:** Describe feature 1.
-- **Feature 2:** Describe feature 2.
-- ...
-
-## Installation
-Provide instructions on how to install and set up your project.
-
-## Usage
-Explain how to use your project, including examples.
-
-## Technologies Used
-List the technologies, frameworks, and libraries used in your project.
-
-## Contributing
-Provide guidelines for contributing to your project.
-
-## License
-Specify the license under which your project is distributed.
-
-## Additional Documentation
-Link to additional documentation or resources related to your project.
-
-## Contact
-
-# Asset Management Smart Contract
-
-This smart contract manages assets stored on the blockchain using the Soroban SDK. It allows creation and retrieval of assets associated with IPFS addresses.
-
-## Contract Overview
-
-The `AssetContract` is designed to facilitate the creation and retrieval of assets stored on the blockchain. It utilizes the Soroban SDK for blockchain interaction and storage.
-
-### Contract Types
-
-#### Asset Struct
-
-```rust
-#[contracttype]
-pub struct Asset {
-    pub ipfs_address: String,
-}
-
-Provide your contact information for inquiries or support.
-
----
-For more details, visit our [Wiki](wiki-url) or check out our [API Documentation](api-docs-url).
-
 # Decentralized File Management System
 
 ## Description
@@ -66,32 +12,92 @@ This project implements a decentralized file management system using blockchain 
 ## Installation
 To install and run this project locally:
 
-1. Clone the repository: `git clone https://github.com/yourusername/your-repo.git`
-2. Navigate to the project directory: `cd your-repo`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+Navigate to the project directory:
 
-## Usage
-1. Connect your MetaMask wallet.
-2. Upload a file using the interface.
-3. Check transaction details and retrieve uploaded files.
+bash
+Copy code
+cd your-repo
+Install dependencies:
 
-## Technologies Used
-- React
-- Express
-- Ethereum blockchain
-- MetaMask
+bash
+Copy code
+npm install
+Start the development server:
 
-## Contributing
+bash
+Copy code
+npm start
+Usage
+Connect your MetaMask wallet.
+Upload a file using the interface.
+Check transaction details and retrieve uploaded files.
+Technologies Used
+React
+Express
+Ethereum blockchain
+MetaMask
+Contributing
 We welcome contributions! Please fork this repository and submit a pull request.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Additional Documentation
-- [API Documentation](docs/api.md)
-- [Blockchain Integration Guide](docs/blockchain-integration.md)
-
-## Contact
+Additional Documentation
+API Documentation
+Blockchain Integration Guide
+Contact
 For questions or support, contact us at team@example.com.
 
+Asset Management Smart Contract
+This smart contract manages assets stored on the blockchain using the Soroban SDK. It allows creation and retrieval of assets associated with IPFS addresses.
+
+Contract Overview
+The AssetContract is designed to facilitate the creation and retrieval of assets stored on the blockchain. It utilizes the Soroban SDK for blockchain interaction and storage.
+
+Contract Types
+Asset Struct
+rust
+Copy code
+#![no_std]
+use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Env, Symbol, String};
+
+#[contracttype]
+#[derive(Clone)]
+pub struct Asset {
+    pub ipfs_address: String,
+}
+
+#[contracttype]
+pub enum AssetBook {
+    Asset(u64),
+}
+
+const COUNT_ASSET: Symbol = symbol_short!("C_ASSET");
+
+#[contract]
+pub struct AssetContract;
+
+#[contractimpl]
+impl AssetContract {
+    pub fn create_asset(env: Env, ipfs_address: String) -> u64 {
+        let mut count_asset: u64 = env.storage().instance().get(&COUNT_ASSET).unwrap_or(0);
+        count_asset += 1;
+
+        let asset = Asset { ipfs_address };
+
+        env.storage().instance().set(&AssetBook::Asset(count_asset), &asset);
+        env.storage().instance().set(&COUNT_ASSET, &count_asset);
+
+        count_asset
+    }
+
+    pub fn fetch_asset(env: Env, asset_id: u64) -> String {
+        let asset: Asset = env.storage().instance().get(&AssetBook::Asset(asset_id)).unwrap_or_else(|| {
+            panic!("Asset not found");
+        });
+        asset.ipfs_address
+    }
+}
