@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import detectEthereumProvider from "@metamask/detect-provider";
+import {
+  requestAccess,
+  isConnected,
+  isAllowed,
+  getPublicKey,
+} from "@stellar/freighter-api";
 import "./styles.css";
 
 const App = () => {
@@ -10,45 +15,44 @@ const App = () => {
   const [retrievedFile, setRetrievedFile] = useState(null);
   const [loading, setLoading] = useState(false); // State for loading indicators
 
-  const connectMetaMask = async () => {
+  const connectFreighter = async () => {
     try {
-      const provider = await detectEthereumProvider();
-      if (provider) {
-        const accounts = await provider.request({
-          method: "eth_requestAccounts",
-        });
-        setPublicKey(accounts[0]);
-      } else {
-        alert("Please install MetaMask!");
+      const publicKey = await requestAccess();
+      console.log(publicKey);
+      if (await isAllowed()) {
+        console.log("Reached here");
+        const connected = await isConnected();
+        if (connected) {
+          const key = await getPublicKey();
+          setPublicKey(key);
+        } else {
+          alert("Please connect with your wallet");
+        }
       }
     } catch (error) {
-      console.error("Error connecting MetaMask:", error);
+      console.error("Error connecting Freighter:", error);
     }
   };
 
-  const uploadFile = async () => {
+  const uploadFileAndCreateAsset = async () => {
     try {
       setLoading(true); // Set loading state while processing
       const reader = new FileReader();
       reader.onloadend = async () => {
         const fileBuffer = reader.result.split(",")[1];
         const uploadResponse = await axios.post(
-          "http://localhost:5000/upload",
+          "http://localhost:5000/upload-and-create-asset",
           {
             file: fileBuffer,
           }
         );
-        const { ipfsPath } = uploadResponse.data;
-        const transactionResponse = await axios.post(
-          "http://localhost:5000/create-asset",
-          { publicKey, ipfsPath }
-        );
-        setTransactionXDR(transactionResponse.data.transactionXDR);
+        const { transactionXDR } = uploadResponse.data;
+        setTransactionXDR(transactionXDR);
         setLoading(false); // Clear loading state
       };
       reader.readAsDataURL(file);
     } catch (error) {
-      console.error("Error uploading file:", error);
+      console.error("Error uploading file and creating asset:", error);
       setLoading(false); // Clear loading state in case of error
     }
   };
@@ -71,10 +75,11 @@ const App = () => {
     <div className="container">
       <header>
         <h1>Decentralized File Management</h1>
-        <button className="btn" onClick={connectMetaMask}>
-          Connect MetaMask
+        <button className="btn" onClick={connectFreighter}>
+          Connect Freighter
         </button>
-        {publicKey && <p>Connected MetaMask Account: {publicKey}</p>}
+        {publicKey && <p>Connected Freighter Account: {publicKey}</p>}
+        {console.log("The public key is", publicKey)}
       </header>
 
       <section>
@@ -82,7 +87,7 @@ const App = () => {
           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
           <button
             className="btn"
-            onClick={uploadFile}
+            onClick={uploadFileAndCreateAsset}
             disabled={!publicKey || !file || loading}
           >
             {loading ? "Uploading..." : "Upload and Create Asset"}
