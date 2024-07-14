@@ -8,6 +8,11 @@ The Decentralized File Management System project aims to provide a secure and de
 - **Asset Creation:** Each uploaded file generates a unique asset on the blockchain, associated with its IPFS address.
 - **File Retrieval:** Users can retrieve uploaded files based on the blockchain records.
 
+##Smart contract
+It contains two fuctions
+-One is create_asset which creates assets and returns the hash key
+-The second is fetch_asset which feaches the assets using the hash key
+
 ## Installation
 To install and run the Decentralized File Management System locally, follow these steps:
 1. Clone the repository: `git clone https://github.com/yourusername/your-repo.git`
