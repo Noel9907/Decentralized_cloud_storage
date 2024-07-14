@@ -28,6 +28,25 @@ Specify the license under which your project is distributed.
 Link to additional documentation or resources related to your project.
 
 ## Contact
+
+# Asset Management Smart Contract
+
+This smart contract manages assets stored on the blockchain using the Soroban SDK. It allows creation and retrieval of assets associated with IPFS addresses.
+
+## Contract Overview
+
+The `AssetContract` is designed to facilitate the creation and retrieval of assets stored on the blockchain. It utilizes the Soroban SDK for blockchain interaction and storage.
+
+### Contract Types
+
+#### Asset Struct
+
+```rust
+#[contracttype]
+pub struct Asset {
+    pub ipfs_address: String,
+}
+
 Provide your contact information for inquiries or support.
 
 ---
