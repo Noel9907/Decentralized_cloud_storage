@@ -8,45 +8,71 @@ The Decentralized File Management System project aims to provide a secure and de
 - **Asset Creation:** Each uploaded file generates a unique asset on the blockchain, associated with its IPFS address.
 - **File Retrieval:** Users can retrieve uploaded files based on the blockchain records.
 
-## Smart contract
-It contains two fuctions
--One is create_asset which creates assets and returns the hash key
--The second is fetch_asset which feaches the assets using the hash key
+## Smart Contract
+The smart contract contains two functions:
+- **create_asset:** This function creates an asset and returns the hash key.
+- **fetch_asset:** This function fetches the asset using the hash key.
 
+### Smart Contract Code Snippet
+```rust
+#[derive(Default)]
+pub struct Contract;
+
+impl Contract {
+    pub fn create_asset(&self, asset_data: Vec<u8>) -> H256 {
+        let hash_key = keccak256(&asset_data);
+        // store asset_data in IPFS and save hash_key on the blockchain
+        hash_key
+    }
+
+    pub fn fetch_asset(&self, hash_key: H256) -> Vec<u8> {
+        // retrieve asset_data from IPFS using hash_key
+        asset_data
+    }
+}
+
+```
 ## Installation
 To install and run the Decentralized File Management System locally, follow these steps:
-1. Clone the repository: `git clone https://github.com/yourusername/your-repo.git`
-2. Navigate to the project directory: `cd your-repo`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
+
+Clone the repository:  https://github.com/Noel9907/Decentralized_cloud_like_storage_system
+
+Navigate to the project directory: cd https://github.com/Noel9907/Decentralized_cloud_like_storage_system
+
+Install dependencies: npm install
+
 
 ## Usage
-1. Connect your MetaMask wallet to interact with the Ethereum blockchain.
-2. Use the file upload interface to upload files.
-3. Check transaction details and retrieve uploaded files using the provided functionality.
+Connect freighter: Ensure you have freighter installed and connected to the Ethereum blockchain.
+Upload Files: Use the file upload interface to securely upload your files.
+Transaction Details: Check the transaction details on the blockchain.
+Retrieve Files: Retrieve uploaded files using the provided functionality based on blockchain records.
 
 ## Technologies Used
 The Decentralized File Management System is built using the following technologies:
-- **Frontend:** React
-- **Backend:** Express
-- **Blockchain:** Ethereum
-- **Wallet Integration:** MetaMask
+
+Frontend: React
+Backend: Express
+Blockchain: Ethereum
+Wallet Integration: Freighter 
 
 ## Contributing
 Contributions to the Decentralized File Management System project are welcome! To contribute:
-1. Fork the repository.
-2. Create your feature branch: `git checkout -b feature/NewFeature`.
-3. Commit your changes: `git commit -am 'Add some feature'`.
-4. Push to the branch: `git push origin feature/NewFeature`.
-5. Submit a pull request.
+
+### Fork the repository.
+Create your feature branch: git checkout -b feature/NewFeature
+Commit your changes: git commit -am 'Add some feature'
+Push to the branch: git push origin feature/NewFeature
+Submit a pull request.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Additional Documentation
 For more detailed information:
-- [API Documentation](docs/api.md): Details about the APIs used in the project.
-- [Blockchain Integration Guide](docs/blockchain-integration.md): Guide for integrating with the Ethereum blockchain.
 
-## Contact
-For questions or support, contact us at team@example.com.
+
+## Additional Documentation
+For more detailed information:
+- [Stellar Documentation](https://developers.stellar.org/docs): Details Stellar and its documentation.
+- [IPFS network provider](https://www.pinata.cloud/): IPFS provider used here
