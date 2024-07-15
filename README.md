@@ -1,7 +1,7 @@
 # Decentralized Cloud Storage
 
 ## Description
-The Decentralized File Management System project aims to provide a secure and decentralized way to manage files using blockchain technology. It allows users to upload files, create blockchain-based assets for each file, and retrieve files based on blockchain records.
+The Decentralized Cloud Storage project aims to provide a secure and decentralized way to storage files using blockchain technology. It allows users to upload files, create blockchain-based assets for each file, and retrieve files based on blockchain records.
 
 ## Features
 - **File Upload:** Users can securely upload files through a user-friendly interface.
@@ -60,10 +60,10 @@ The Decentralized File Management System is built using the following technologi
 Contributions to the Decentralized File Management System project are welcome! To contribute:
 
 ### Fork the repository.
-1-**Create your feature branch**: `git checkout -b feature/NewFeature`
-2-**Commit your changes git commit**: `-am 'Add some feature'`
-3-**Push to the branch**: `git push origin feature/NewFeature`
-5- **Submit a pull request.**
+1. -**Create your feature branch**: `git checkout -b feature/NewFeature`
+2. -**Commit your changes git commit**: `-am 'Add some feature'`
+3. -**Push to the branch**: `git push origin feature/NewFeature`
+5. -**Submit a pull request.**
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
