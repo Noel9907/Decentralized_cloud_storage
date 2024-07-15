@@ -35,11 +35,11 @@ impl Contract {
 ## Installation
 To install and run the Decentralized File Management System locally, follow these steps:
 
-Clone the repository:  https://github.com/Noel9907/Decentralized_cloud_like_storage_system
+Clone the repository:  `https://github.com/Noel9907/Decentralized_cloud_like_storage_system`
 
-Navigate to the project directory: cd https://github.com/Noel9907/Decentralized_cloud_like_storage_system
+Navigate to the project directory: `cd https://github.com/Noel9907/Decentralized_cloud_like_storage_system`
 
-Install dependencies: npm install
+Install dependencies: `npm install`
 
 
 ## Usage
