@@ -1,4 +1,4 @@
-# Decentralized File Management System
+# Decentralized Cloud Storage
 
 ## Description
 The Decentralized File Management System project aims to provide a secure and decentralized way to manage files using blockchain technology. It allows users to upload files, create blockchain-based assets for each file, and retrieve files based on blockchain records.
@@ -43,34 +43,30 @@ Install dependencies: npm install
 
 
 ## Usage
-Connect freighter: Ensure you have freighter installed and connected to the Ethereum blockchain.
-Upload Files: Use the file upload interface to securely upload your files.
-Transaction Details: Check the transaction details on the blockchain.
-Retrieve Files: Retrieve uploaded files using the provided functionality based on blockchain records.
+-**Connect freighter**: Ensure you have freighter installed and connected to the Ethereum blockchain.
+-**Upload Files**: Use the file upload interface to securely upload your files.
+-**Transaction Details**: Check the transaction details on the blockchain.
+-**Retrieve Files**: Retrieve uploaded files using the provided functionality based on blockchain records.
 
 ## Technologies Used
 The Decentralized File Management System is built using the following technologies:
 
-Frontend: React
-Backend: Express
-Blockchain: Ethereum
-Wallet Integration: Freighter 
+-**Frontend**: React
+-**Backend**: Express
+-**Blockchain**: Ethereum
+-**Wallet Integration**: Freighter 
 
 ## Contributing
 Contributions to the Decentralized File Management System project are welcome! To contribute:
 
 ### Fork the repository.
-Create your feature branch: git checkout -b feature/NewFeature
-Commit your changes: git commit -am 'Add some feature'
-Push to the branch: git push origin feature/NewFeature
-Submit a pull request.
+1-**Create your feature branch**: `git checkout -b feature/NewFeature`
+2-**Commit your changes git commit**: `-am 'Add some feature'`
+3-**Push to the branch**: `git push origin feature/NewFeature`
+5- **Submit a pull request.**
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## Additional Documentation
-For more detailed information:
-
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Additional Documentation
 For more detailed information:
