@@ -13,18 +13,15 @@ const App = () => {
   const [publicKey, setPublicKey] = useState("");
   const [transactionXDR, setTransactionXDR] = useState("");
   const [retrievedFile, setRetrievedFile] = useState(null);
-  const [loading, setLoading] = useState(false); // State for loading indicators
+  const [loading, setLoading] = useState(false);
 
   const connectFreighter = async () => {
     try {
-      const publicKey = await requestAccess();
-      console.log(publicKey);
+      const key = await requestAccess();
       if (await isAllowed()) {
-        console.log("Reached here");
-        const connected = await isConnected();
-        if (connected) {
-          const key = await getPublicKey();
-          setPublicKey(key);
+        if (await isConnected()) {
+          const publicKey = await getPublicKey();
+          setPublicKey(publicKey);
         } else {
           alert("Please connect with your wallet");
         }
@@ -36,38 +33,36 @@ const App = () => {
 
   const uploadFileAndCreateAsset = async () => {
     try {
-      setLoading(true); // Set loading state while processing
+      setLoading(true);
       const reader = new FileReader();
       reader.onloadend = async () => {
         const fileBuffer = reader.result.split(",")[1];
-        const uploadResponse = await axios.post(
+        const response = await axios.post(
           "http://localhost:5000/upload-and-create-asset",
-          {
-            file: fileBuffer,
-          }
+          { file: fileBuffer }
         );
-        const { transactionXDR } = uploadResponse.data;
+        const { transactionXDR } = response.data;
         setTransactionXDR(transactionXDR);
-        setLoading(false); // Clear loading state
+        setLoading(false);
       };
       reader.readAsDataURL(file);
     } catch (error) {
       console.error("Error uploading file and creating asset:", error);
-      setLoading(false); // Clear loading state in case of error
+      setLoading(false);
     }
   };
 
   const retrieveFile = async () => {
     try {
-      setLoading(true); // Set loading state while fetching
+      setLoading(true);
       const response = await axios.get(
-        "http://localhost:5000/fetch-asset/" + publicKey
+        `http://localhost:5000/fetch-asset/${publicKey}`
       );
       setRetrievedFile(response.data.assetData);
-      setLoading(false); // Clear loading state
+      setLoading(false);
     } catch (error) {
       console.error("Error retrieving file:", error);
-      setLoading(false); // Clear loading state in case of error
+      setLoading(false);
     }
   };
 
@@ -79,7 +74,6 @@ const App = () => {
           Connect Freighter
         </button>
         {publicKey && <p>Connected Freighter Account: {publicKey}</p>}
-        {console.log("The public key is", publicKey)}
       </header>
 
       <section>
@@ -113,7 +107,6 @@ const App = () => {
           <div className="file-retrieve">
             <h3>Retrieved File</h3>
             <p>{retrievedFile}</p>
-            {/* Display other details of the retrieved file if needed */}
           </div>
         )}
       </section>
